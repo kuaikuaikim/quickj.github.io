@@ -67,6 +67,71 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Mathematical-Derivation-of-Logistic-Regression" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/" class="article-date">
+  <time datetime="2017-05-26T13:20:16.000Z" itemprop="datePublished">2017-05-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/">Mathematical Derivation of Logistic Regression</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="logistic回归数学推导">Logistic回归数学推导</h3>
+<p>设训练输入数据<span class="math inline">\(x\)</span>, 各权重值为<span class="math inline">\(w_0,w_1,w_2\)</span>…<span class="math inline">\(w_n\)</span> 则 <span class="math display">\[ \kappa  (x)=w_0+w_1x_1+w_2x_2...+w_nx_n \tag{1} \]</span></p>
+<p>这里 <span class="math inline">\(x_1,x_2...x_n\)</span>是数据<span class="math inline">\(x\)</span>的n维特征。 最终以sigmod函数输出<span class="math inline">\(f(x)\)</span>, 则 <span class="math display">\[ f(x)=\frac{1}{1+e^{-x}} \tag{2} \]</span> 结合1和2， <span class="math display">\[ f(x)=\frac{1}{1+e^{-\kappa (x)}} \tag{3} \]</span></p>
+<p>sigmod函数是个S型曲线。<br>
+<img src="/img/logistic_curve_svg.png" alt="sigmod"></p>
+<p>Logistic回归结果是个二项分布，不是1就是0.<br>
+设在<span class="math inline">\((x;w)\)</span>的条件下，输出结果为1的概率: <span class="math display">\[
+P(y=1|x;w) =\mu(x) = \frac{1}{1+e^{-\kappa (x)}} \tag{4}
+\]</span> 那么结果为0的概率 <span class="math display">\[
+P(y=0|x;w) = 1-\mu(x) = \frac{1}{1+e^{\kappa (x)}} \tag{5}
+\]</span></p>
+<p>设有m个独立的训练数据 <span class="math inline">\(x=(x_1,x_2...x_m)\)</span>，我们的目的是找到一组n维特征权重参数 <span class="math inline">\(w=(w_1,w_2...w_n)\)</span>，使得这m个数据的输出结果的概率最有可能发生(极大似然估计)。由于这m个数据相互独立，而且满足二项分布，得到极大似然函数 <span class="math display">\[ L(x) = \prod_{i=1}^{m}(\mu(x_i))^{y_i}(1-\mu(x_i))^{1-y_i} \tag{6} \]</span></p>
+<p>左右两边取对数, <span class="math display">\[
+\ln L(x) =  \sum_{i=1}^{m} (y_i\ln \mu(x_i)+(1-y_i)\ln(1-\mu(x_i))) \tag{7}
+\]</span></p>
+<p>对每个参数<span class="math inline">\(w\)</span>求偏导数，例如对<span class="math inline">\(w_k\)</span>求偏导数（注意:累加的导数等于各项导数的累加）</p>
+<p><span class="math display">\[
+\begin{align}
+\frac{\partial  \ln L(x)}{\partial  w_k} &amp;= \sum_{i=1}^{m}\left[\frac{y_i}{\mu(x_i)}\mu(x_i)&#39;-\frac{1-y_i}{1-\mu(x_i)}\mu(x_i)&#39;\right]  \\  
+&amp;= \sum_{i=1}^{m}\left[(\frac{y_i}{\mu(x_i)}-\frac{1-y_i}{1-\mu(x_i)})\mu(x_i)&#39;\right] \\
+&amp;= \sum_{i=1}^{m}\left[(\frac{y_i}{\mu(x_i)}-\frac{1-y_i}{1-\mu(x_i)})[\mu(x)(1-\mu(x))]\kappa(x)&#39; \right] \\
+&amp;= \sum_{i=1}^{m}\left[ (y_i-\mu(x_i))\kappa(x)&#39; \right] \\
+&amp;= \sum_{i=1}^{m}\left[ (y_i-\mu(x_i))x_{ik} \right ]
+\end{align}
+\]</span></p>
+<p>当<span class="math inline">\(\frac{\partial \ln L(x)}{\partial w_k}=0\)</span>时，<span class="math inline">\(\ln L(x)\)</span>取极大值，n个参数就有n个偏导数方程。<br>
+直接求方程有一定的难度，计算机一般利用梯度下降法来求最优参数<span class="math inline">\(w_k\)</span>，按照梯度的反方向我们总能找到极小值。(注意：此处求极大值，因此是梯度上升的方向)</p>
+<p><span class="math display">\[w_k=w_k+\lambda\frac{\partial  \ln L(x)}{\partial  w_k} \]</span></p>
+<p>这里<span class="math inline">\(\lambda\)</span>表示步长。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/" data-id="cj37lv8hq0000gbweawvjcyiz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Mathematical-Derivation-of-RSA-Encryption-Algorithm" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/05/25/Mathematical-Derivation-of-RSA-Encryption-Algorithm/" class="article-date">
@@ -132,7 +197,7 @@ m^{ed} \equiv m \pmod {n} \tag{3}
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/25/Mathematical-Derivation-of-RSA-Encryption-Algorithm/" data-id="cj35v34yg0000v6weqdy81h3x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/25/Mathematical-Derivation-of-RSA-Encryption-Algorithm/" data-id="cj37lv8hy0002gbweli54en8t" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加密算法/">加密算法</a></li></ul>
@@ -198,7 +263,7 @@ m^{ed} \equiv m \pmod {n} \tag{3}
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/24/The-Fundamental-of-BitCoin-UTXO/" data-id="cj35v34yp0002v6we0izlwfek" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/24/The-Fundamental-of-BitCoin-UTXO/" data-id="cj37lv8i10003gbwelck2csk8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/比特币/">比特币</a></li></ul>
@@ -250,7 +315,7 @@ m^{ed} \equiv m \pmod {n} \tag{3}
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/24/hello-world/" data-id="cj35v34yw0004v6wen2n7mu09" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/24/hello-world/" data-id="cj37lv8ia0005gbwembsar8oa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -302,6 +367,10 @@ m^{ed} \equiv m \pmod {n} \tag{3}
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/">Mathematical Derivation of Logistic Regression</a>
+          </li>
         
           <li>
             <a href="/2017/05/25/Mathematical-Derivation-of-RSA-Encryption-Algorithm/">Mathematical Derivation of RSA Encryption Algorithm</a>
