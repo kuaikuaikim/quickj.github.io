@@ -5,18 +5,18 @@
   
   <title>Mathematical Derivation of Logistic Regression | Kuai&#39;s Black Tech Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Logistic回归数学推导 设训练输入数据\(x\), 各权重值为\(w_0,w_1,w_2\)…\(w_n\) 则 \[ \kappa  (x)=w_0+w_1x_1+w_2x_2...+w_nx_n \tag{1} \] 这里 \(x_1,x_2...x_n\)是数据\(x\)的n维特征。 最终以sigmod函数输出\(f(x)\), 则 \[ f(x)=\frac{1}{1+e^{-x}}">
+  <meta name="description" content="原创文章,禁止转载 Logistic回归数学推导 设训练输入数据\(x\), 各权重值为\(w_0,w_1,w_2\)…\(w_n\) 则 \[ \kappa  (x)=w_0+w_1x_1+w_2x_2...+w_nx_n \tag{1} \] 这里 \(x_1,x_2...x_n\)是数据\(x\)的n维特征。 最终以sigmod函数输出\(f(x)\), 则 \[ f(x)=\frac{1}">
 <meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mathematical Derivation of Logistic Regression">
 <meta property="og:url" content="http://yoursite.com/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/index.html">
 <meta property="og:site_name" content="Kuai&#39;s Black Tech Blog">
-<meta property="og:description" content="Logistic回归数学推导 设训练输入数据\(x\), 各权重值为\(w_0,w_1,w_2\)…\(w_n\) 则 \[ \kappa  (x)=w_0+w_1x_1+w_2x_2...+w_nx_n \tag{1} \] 这里 \(x_1,x_2...x_n\)是数据\(x\)的n维特征。 最终以sigmod函数输出\(f(x)\), 则 \[ f(x)=\frac{1}{1+e^{-x}}">
+<meta property="og:description" content="原创文章,禁止转载 Logistic回归数学推导 设训练输入数据\(x\), 各权重值为\(w_0,w_1,w_2\)…\(w_n\) 则 \[ \kappa  (x)=w_0+w_1x_1+w_2x_2...+w_nx_n \tag{1} \] 这里 \(x_1,x_2...x_n\)是数据\(x\)的n维特征。 最终以sigmod函数输出\(f(x)\), 则 \[ f(x)=\frac{1}">
 <meta property="og:image" content="http://yoursite.com/img/logistic_curve_svg.png">
-<meta property="og:updated_time" content="2017-05-28T02:08:49.000Z">
+<meta property="og:updated_time" content="2017-05-28T16:52:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mathematical Derivation of Logistic Regression">
-<meta name="twitter:description" content="Logistic回归数学推导 设训练输入数据\(x\), 各权重值为\(w_0,w_1,w_2\)…\(w_n\) 则 \[ \kappa  (x)=w_0+w_1x_1+w_2x_2...+w_nx_n \tag{1} \] 这里 \(x_1,x_2...x_n\)是数据\(x\)的n维特征。 最终以sigmod函数输出\(f(x)\), 则 \[ f(x)=\frac{1}{1+e^{-x}}">
+<meta name="twitter:description" content="原创文章,禁止转载 Logistic回归数学推导 设训练输入数据\(x\), 各权重值为\(w_0,w_1,w_2\)…\(w_n\) 则 \[ \kappa  (x)=w_0+w_1x_1+w_2x_2...+w_nx_n \tag{1} \] 这里 \(x_1,x_2...x_n\)是数据\(x\)的n维特征。 最终以sigmod函数输出\(f(x)\), 则 \[ f(x)=\frac{1}">
 <meta name="twitter:image" content="http://yoursite.com/img/logistic_curve_svg.png">
   
     <link rel="alternate" href="/atom.xml" title="Kuai&#39;s Black Tech Blog" type="application/atom+xml">
@@ -94,7 +94,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="logistic回归数学推导">Logistic回归数学推导</h3>
+        <p><small>原创文章,禁止转载<small></small></small></p>
+<h3 id="logistic回归数学推导">Logistic回归数学推导</h3>
 <p>设训练输入数据<span class="math inline">\(x\)</span>, 各权重值为<span class="math inline">\(w_0,w_1,w_2\)</span>…<span class="math inline">\(w_n\)</span> 则 <span class="math display">\[ \kappa  (x)=w_0+w_1x_1+w_2x_2...+w_nx_n \tag{1} \]</span></p>
 <p>这里 <span class="math inline">\(x_1,x_2...x_n\)</span>是数据<span class="math inline">\(x\)</span>的n维特征。 最终以sigmod函数输出<span class="math inline">\(f(x)\)</span>, 则 <span class="math display">\[ f(x)=\frac{1}{1+e^{-x}} \tag{2} \]</span> 结合1和2， <span class="math display">\[ f(x)=\frac{1}{1+e^{-\kappa (x)}} \tag{3} \]</span></p>
 <p>sigmod函数是个S型曲线。<br>
@@ -128,7 +129,7 @@ P(y=0|x;w) = 1-\mu(x) = \frac{1}{1+e^{\kappa (x)}} \tag{5}
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/" data-id="cj382iymv00003zwefnnnjnq3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/" data-id="cj38yui2p0000mzwejcab4ktl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
@@ -138,6 +139,15 @@ P(y=0|x;w) = 1-\mu(x) = \frac{1}{1+e^{\kappa (x)}} \tag{5}
   
     
 <nav id="article-nav">
+  
+    <a href="/2017/05/28/Mathematical-Modeling-of-Back-Propagation-Neural-Network/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Mathematical Modeling of Back Propagation Neural Network
+        
+      </div>
+    </a>
   
   
     <a href="/2017/05/25/Mathematical-Derivation-of-RSA-Encryption-Algorithm/" id="article-nav-older" class="article-nav-link-wrap">
@@ -171,7 +181,7 @@ P(y=0|x;w) = 1-\mu(x) = \frac{1}{1+e^{\kappa (x)}} \tag{5}
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/加密算法/" style="font-size: 10px;">加密算法</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a>
+      <a href="/tags/加密算法/" style="font-size: 10px;">加密算法</a> <a href="/tags/机器学习/" style="font-size: 20px;">机器学习</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a>
     </div>
   </div>
 
@@ -191,6 +201,10 @@ P(y=0|x;w) = 1-\mu(x) = \frac{1}{1+e^{\kappa (x)}} \tag{5}
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/28/Mathematical-Modeling-of-Back-Propagation-Neural-Network/">Mathematical Modeling of Back Propagation Neural Network</a>
+          </li>
         
           <li>
             <a href="/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/">Mathematical Derivation of Logistic Regression</a>

@@ -67,6 +67,111 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Mathematical-Modeling-of-Back-Propagation-Neural-Network" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/05/28/Mathematical-Modeling-of-Back-Propagation-Neural-Network/" class="article-date">
+  <time datetime="2017-05-28T14:18:23.000Z" itemprop="datePublished">2017-05-28</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/28/Mathematical-Modeling-of-Back-Propagation-Neural-Network/">Mathematical Modeling of Back Propagation Neural Network</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><small>原创文章,禁止转载<small></small></small></p>
+<h3 id="bp神经网络的数学模型">BP神经网络的数学模型</h3>
+<p> BP是比较经典的反向传播回馈的神经网络，可以说它是很多复杂神经网络的基础。例如卷积神经网络CNN也是基于BP发展而来(多了卷积层，池化层等)。这里我们只讨论简单的只有一个隐藏层的BP。如图所示:</p>
+<div class="figure">
+<img src="/img/th.jpeg">
+
+</div>
+<p> 整个网络分为输入层，隐藏层，输出层，每层的每个神经元与上一层或下一层的神经元两两连接(每层全连接)，是不是跟现实中的有点像。<br>
+<img src="/img/3d0c31c.jpg"></p>
+<h4 id="前向传播">前向传播</h4>
+<p> 很容易根据上图可以建立一个非常简单的模型，即每个</p>
+<p><span class="math display">\[
+\begin{align}
+\notag
+z_i^l &amp;= f(w_{1i}^{l-1}x_1^{l-1}+w_{2i}^{l-1}x_2^{l-1}+..+w_{ni}^{l-1}x_n^{l-1}+b_i^{l-1}) \\
+&amp;= \sum_{j=1}^n w_{ji}^{l-1}x_{j}^{l-1}+b_i^{l-1}
+\end{align}
+ \]</span></p>
+<p> 这个公式可以理解为l层神经元i的激活值<span class="math inline">\(z_i^l\)</span>等于上一层与之相连的每个神经元<span class="math inline">\(x_n^{l-1}\)</span>乘以一个权重<span class="math inline">\(w_{ni}^{l-1}\)</span>，然后每个乘积相加，再加上一个偏置量<span class="math inline">\(b_i^{l-1}\)</span>,得到的值在l层经过一个函数<span class="math inline">\(f\)</span>输出。<br>
+ 那么这个<span class="math inline">\(f\)</span>函数究竟是什么函数呢?和logistic回归一样，同样是简单的sigmod函数。 <span class="math display">\[
+f(x)=\frac{1}{1+e^{-x}}
+\]</span> sigmod函数是个S型曲线。<br>
+<img src="/img/logistic_curve_svg.png" alt="sigmod"><br>
+这里我们进一步得到具体的模型:<br>
+<span class="math display">\[
+z_i^l = \frac{1} {1+e^{ -(\sum_{j=1}^n w_{ji}^{l-1}x_{j}^{l-1}+b_i^{l-1}) }}
+\]</span></p>
+<h4 id="反向传播">反向传播</h4>
+<p>假设:<br>
+K: 训练数据集合</p>
+<p><span class="math inline">\(O_p\)</span> : 神经网络的模型输出结果</p>
+<p><span class="math inline">\(T_p\)</span> : 训练数据的标签</p>
+<p><span class="math inline">\(O_j^l\)</span> : 第l层第j个神经元输出</p>
+<p><span class="math inline">\(W_{ij}^{l}\)</span> : 第l-1层第i个神经元与l层第j个神经元的连接权值</p>
+<p><span class="math inline">\(S(x)\)</span>: sigmod函数 <span class="math inline">\(\frac{1}{1+e^{-x}}\)</span></p>
+<p><span class="math inline">\(b_j^l\)</span> : 第l层第j个节点的偏置</p>
+<p><span class="math inline">\(t_j\)</span> : 输出层的第j个节点的输出值</p>
+<h5 id="输出层权值计算">输出层权值计算</h5>
+<p>假设:<br>
+<span class="math inline">\(W_{jk}\)</span> : 输出层第k个节点与隐藏层第j个节点的权值</p>
+<p>设损失函数: <span class="math display">\[
+J(x) = \frac{1}{2}\sum_{p\in K}(O_p-T_p)^2
+\]</span> 我们的目的就是训练得到各层<span class="math inline">\(W\)</span>,<span class="math inline">\(b\)</span>的值，让损失函数<span class="math inline">\(J(x)\)</span>最小。<br>
+例如对输出层<span class="math inline">\(W_{jk}\)</span>求偏导:<br>
+<span class="math display">\[
+\begin{align}
+\notag
+\frac{\partial J(x)}{W_{jk}} &amp;= \frac {\partial \frac{1}{2}\sum_{p \in K}(O_p-T_p)^2}{\partial W_{jk}} \\
+&amp;= \sum_{p\in K} (O_k-T_k)\frac{\partial O_k}{W_{jk}} \\
+&amp;= \sum_{p\in K} (O_k-T_k)\frac{\partial S(x_k)}{W_{jk}}\\
+&amp;= \sum_{p\in K} (O_k-T_k)S(x_k)(1-S(x_k)) \frac{\partial x_k}{W_{jk}}\\
+&amp;= \sum_{p\in K} (O_k-T_k)O(x_k)(1-O(x_k)) \frac{\partial x_k}{W_{jk}}
+\end{align}
+\]</span></p>
+<p>上式中 <span class="math inline">\(O_k=S(x_k)\)</span>, <span class="math display">\[ \frac{\partial S(x_k)}{\partial x_k}=S(x_k)(1-S(x_K)) \]</span></p>
+<p>且<span class="math inline">\(x_k=O_jW_{jk}\)</span>，所以: <span class="math display">\[  
+\frac{\partial x_k}{\partial W_{jk}} = O_j
+\]</span> 最终得到<br>
+<span class="math display">\[
+\frac{\partial J(x)}{W_{jk}} = \sum_{p\in K} (O_k-T_k)O(x_k)(1-O(x_k))O_j
+\]</span></p>
+<p>令 <span class="math inline">\(\delta_k=(O_k-T_k)O(x_k)(1-O(x_k))\)</span>，则<br>
+<span class="math display">\[
+\frac{\partial J(x)}{W_{jk}} = \sum_{p\in K} \delta_k O_j
+\]</span></p>
+<p>其实这里的<span class="math inline">\(\delta_k就是传说中的残差\)</span>，那么可以理解为l层第k个节点和第l-1层第j个节点对应的<span class="math inline">\(W_{jk}^l\)</span>的偏导数等于该层的残差<span class="math inline">\(\delta_k^l\)</span>乘以上一层第j个节点对应的输入值<span class="math inline">\(O_j\)</span>。</p>
+<p>未完待续…</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/05/28/Mathematical-Modeling-of-Back-Propagation-Neural-Network/" data-id="cj38yui320004mzwe9v2fz359" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-Mathematical-Derivation-of-Logistic-Regression" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/" class="article-date">
@@ -89,7 +194,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="logistic回归数学推导">Logistic回归数学推导</h3>
+        <p><small>原创文章,禁止转载<small></small></small></p>
+<h3 id="logistic回归数学推导">Logistic回归数学推导</h3>
 <p>设训练输入数据<span class="math inline">\(x\)</span>, 各权重值为<span class="math inline">\(w_0,w_1,w_2\)</span>…<span class="math inline">\(w_n\)</span> 则 <span class="math display">\[ \kappa  (x)=w_0+w_1x_1+w_2x_2...+w_nx_n \tag{1} \]</span></p>
 <p>这里 <span class="math inline">\(x_1,x_2...x_n\)</span>是数据<span class="math inline">\(x\)</span>的n维特征。 最终以sigmod函数输出<span class="math inline">\(f(x)\)</span>, 则 <span class="math display">\[ f(x)=\frac{1}{1+e^{-x}} \tag{2} \]</span> 结合1和2， <span class="math display">\[ f(x)=\frac{1}{1+e^{-\kappa (x)}} \tag{3} \]</span></p>
 <p>sigmod函数是个S型曲线。<br>
@@ -123,7 +229,7 @@ P(y=0|x;w) = 1-\mu(x) = \frac{1}{1+e^{\kappa (x)}} \tag{5}
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/" data-id="cj382iymv00003zwefnnnjnq3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/" data-id="cj38yui2p0000mzwejcab4ktl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
@@ -157,7 +263,8 @@ P(y=0|x;w) = 1-\mu(x) = \frac{1}{1+e^{\kappa (x)}} \tag{5}
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="rsa算法数学推导">RSA算法数学推导</h3>
+        <p><small>原创文章,禁止转载<small></small></small></p>
+<h3 id="rsa算法数学推导">RSA算法数学推导</h3>
 <p>p和q都是质数 <span class="math display">\[
 n = pq
 \]</span> 取n欧拉函数<span class="math inline">\(\phi(n)\)</span> <span class="math display">\[
@@ -200,7 +307,7 @@ m^{ed} \equiv m \pmod {n} \tag{3}
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/25/Mathematical-Derivation-of-RSA-Encryption-Algorithm/" data-id="cj382iyn900043zwessj2fl6l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/25/Mathematical-Derivation-of-RSA-Encryption-Algorithm/" data-id="cj38yui2w0002mzwefs4xltli" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/加密算法/">加密算法</a></li></ul>
@@ -266,7 +373,7 @@ m^{ed} \equiv m \pmod {n} \tag{3}
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/24/The-Fundamental-of-BitCoin-UTXO/" data-id="cj382iyn200023zwe93su0f46" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/24/The-Fundamental-of-BitCoin-UTXO/" data-id="cj38yui3a0006mzwehkivbvzz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/比特币/">比特币</a></li></ul>
@@ -318,7 +425,7 @@ m^{ed} \equiv m \pmod {n} \tag{3}
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/24/hello-world/" data-id="cj382iynd00053zwea5oy38ip" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/24/hello-world/" data-id="cj38yui370005mzwelp02yu87" class="article-share-link">Share</a>
       
       
     </footer>
@@ -350,7 +457,7 @@ m^{ed} \equiv m \pmod {n} \tag{3}
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/加密算法/" style="font-size: 10px;">加密算法</a> <a href="/tags/机器学习/" style="font-size: 10px;">机器学习</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a>
+      <a href="/tags/加密算法/" style="font-size: 10px;">加密算法</a> <a href="/tags/机器学习/" style="font-size: 20px;">机器学习</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a>
     </div>
   </div>
 
@@ -370,6 +477,10 @@ m^{ed} \equiv m \pmod {n} \tag{3}
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/05/28/Mathematical-Modeling-of-Back-Propagation-Neural-Network/">Mathematical Modeling of Back Propagation Neural Network</a>
+          </li>
         
           <li>
             <a href="/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/">Mathematical Derivation of Logistic Regression</a>
