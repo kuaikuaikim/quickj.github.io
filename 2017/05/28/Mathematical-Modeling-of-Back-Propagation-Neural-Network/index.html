@@ -15,7 +15,7 @@
 <meta property="og:image" content="http://yoursite.com/img/th.jpeg">
 <meta property="og:image" content="http://yoursite.com/img/3d0c31c.jpg">
 <meta property="og:image" content="http://yoursite.com/img/logistic_curve_svg.png">
-<meta property="og:updated_time" content="2017-05-28T17:18:44.000Z">
+<meta property="og:updated_time" content="2017-05-28T17:20:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Mathematical Modeling of Back Propagation Neural Network">
 <meta name="twitter:description" content="原创文章,禁止转载 BP神经网络的数学模型  BP是比较经典的反向传播回馈的神经网络，可以说它是很多复杂神经网络的基础。例如卷积神经网络CNN也是基于BP发展而来(多了卷积层，池化层等)。这里我们只讨论简单的只有一个隐藏层的BP。如图所示:      整个网络分为输入层，隐藏层，输出层，每层的每个神经元与上一层或下一层的神经元两两连接(每层全连接)，是不是跟现实中的有点像。  前向传播  很容易根">
@@ -63,9 +63,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
@@ -111,7 +111,7 @@
 \begin{align}
 \notag
 z_i^l &amp;= f(w_{1i}^{l-1}x_1^{l-1}+w_{2i}^{l-1}x_2^{l-1}+..+w_{ni}^{l-1}x_n^{l-1}+b_i^{l-1}) \notag \\
-&amp;= \sum_{j=1}^n w_{ji}^{l-1}x_{j}^{l-1}+b_i^{l-1}
+&amp;= \sum_{j=1}^n w_{ji}^{l-1}x_{j}^{l-1}+b_i^{l-1} \notag
 \end{align}
  \]</span></p>
 <p> 这个公式可以理解为l层神经元i的激活值<span class="math inline">\(z_i^l\)</span>等于上一层与之相连的每个神经元<span class="math inline">\(x_n^{l-1}\)</span>乘以一个权重<span class="math inline">\(w_{ni}^{l-1}\)</span>，然后每个乘积相加，再加上一个偏置量<span class="math inline">\(b_i^{l-1}\)</span>,得到的值在l层经过一个函数<span class="math inline">\(f\)</span>输出。<br>
@@ -167,7 +167,7 @@ J(x) = \frac{1}{2}\sum_{p\in K}(O_p-T_p)^2
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/05/28/Mathematical-Modeling-of-Back-Propagation-Neural-Network/" data-id="cj38yz4wc0004r9weh6ylc3c2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/05/28/Mathematical-Modeling-of-Back-Propagation-Neural-Network/" data-id="cj38z1rb50004tlweyvmg4z6k" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/机器学习/">机器学习</a></li></ul>
@@ -180,7 +180,7 @@ J(x) = \frac{1}{2}\sum_{p\in K}(O_p-T_p)^2
   
   
     <a href="/2017/05/26/Mathematical-Derivation-of-Logistic-Regression/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">Mathematical Derivation of Logistic Regression</div>
     </a>
   
@@ -198,7 +198,7 @@ J(x) = \frac{1}{2}\sum_{p\in K}(O_p-T_p)^2
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/加密算法/">加密算法</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/机器学习/">机器学习</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/比特币/">比特币</a></li></ul>
     </div>
@@ -208,7 +208,7 @@ J(x) = \frac{1}{2}\sum_{p\in K}(O_p-T_p)^2
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/加密算法/" style="font-size: 10px;">加密算法</a> <a href="/tags/机器学习/" style="font-size: 20px;">机器学习</a> <a href="/tags/比特币/" style="font-size: 10px;">比特币</a>
     </div>
@@ -227,7 +227,7 @@ J(x) = \frac{1}{2}\sum_{p\in K}(O_p-T_p)^2
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
@@ -264,7 +264,7 @@ J(x) = \frac{1}{2}\sum_{p\in K}(O_p-T_p)^2
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 Jack Kim<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
